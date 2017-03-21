@@ -23,7 +23,7 @@ fb_parameters.angle_step = 30;
 alpha = -0.05;
 
 %apply SCIRD
-[outIm, properties, ALLfiltered] = SCIRD(I,alpha,ridges_color,fb_parameters);
+[outIm, properties, ALLfiltered, SCIRD_filters] = SCIRD(I,alpha,ridges_color,fb_parameters);
 
 %show original image
 %figure,imshow(I,[])
@@ -38,4 +38,7 @@ newImage = outIm;
 newImage(outIm<2) = 0;
 newImage(outIm>=2) = 255;
 figure,imshow(newImage, [])
-
+normalised_filters = print_SCIRD(SCIRD_filters);
+for print_image_id = 1:size(normalised_filters, 2)
+    imwrite(normalised_filters{1, print_image_id}, strcat('filter', num2str(print_image_id), '.png'));
+end
