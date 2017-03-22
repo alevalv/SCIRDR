@@ -38,7 +38,16 @@ newImage = outIm;
 newImage(outIm<2) = 0;
 newImage(outIm>=2) = 255;
 figure,imshow(newImage, [])
-normalised_filters = print_SCIRD(SCIRD_filters);
-for print_image_id = 1:size(normalised_filters, 2)
-    imwrite(normalised_filters{1, print_image_id}, strcat('filter', num2str(print_image_id), '.png'));
+
+%the following three lines prints the result of each filter
+
+for print_image_id = 1:size(ALLfiltered,3)
+    imwrite(ALLfiltered(:, :, print_image_id), strcat('filter_applied', num2str(print_image_id), '.png'))
 end
+
+%the following three lines prints the SCIRD filters, normalising them before
+
+%normalised_filters = print_SCIRD(SCIRD_filters);
+%for print_image_id = 1:size(normalised_filters, 2)
+%    imwrite(normalised_filters{1, print_image_id}, strcat('filter', num2str(print_image_id), '.png'));
+%end
