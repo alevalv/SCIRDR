@@ -1,0 +1,9 @@
+executable = runner.m
+transfer_input_files = images
+error = err_scirdr
+log = log_scirdr
+output = out_scirdr
+should_transfer_files = YES
+transfer_output_files =
+Requirements = UidDomain == "cloud.univalle.edu.co"
+arguments = input
