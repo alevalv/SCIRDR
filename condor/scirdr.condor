@@ -1,9 +1,12 @@
-executable = runner.m
-transfer_input_files = images
-error = err_scirdr
-log = log_scirdr
-output = out_scirdr
-should_transfer_files = YES
-transfer_output_files =
-Requirements = UidDomain == "cloud.univalle.edu.co"
-arguments = input
+universe                = docker
+docker_image            = 192.168.28.50:5000/octaveimage2/uv
+executable              = /bin/bash
+arguments               = demooctave.sh runner.m input
+should_transfer_files   = YES
+transfer_input_files    = demooctave.sh,runner.m,input,runme.m,SCIRD.m,create_SCIRD_fb.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m
+#transfer_output_files   = otro/*.png
+when_to_transfer_output = ON_EXIT
+output                  = out.$(Process)
+error                   = err.$(Process)
+log                     = log.$(Process)
+queue 1
