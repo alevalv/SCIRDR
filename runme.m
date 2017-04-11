@@ -1,6 +1,6 @@
 %Toy example: apply SCIRD to corneal nerve fibres captured with IVCM
 %single layer grayscale single precision
-function runme(I, filename)
+function runme(I, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep)
 
 
 I = single(I(:,:,1));
@@ -9,14 +9,15 @@ I = single(I(:,:,1));
 ridges_color = 'white';
 
 %set filter bank parameters
-fb_parameters.sigma_1 = [2 4];
-fb_parameters.sigma_1_step = 1;
-fb_parameters.sigma_2 = [2 3];
-fb_parameters.sigma_2_step = 1;
-fb_parameters.k = [-0.1 0.1];
-fb_parameters.k_step = 0.05;
-fb_parameters.angle_step = 30;
+fb_parameters.sigma_1 = sigma1;%[2 4];
+fb_parameters.sigma_1_step = sigma1Step; %1;
+fb_parameters.sigma_2 = sigma2;%[2 3];
+fb_parameters.sigma_2_step = sigma2Step; %1;
+fb_parameters.k = k; %[-0.1 0.1];
+fb_parameters.k_step = kStep; %0.05;
+fb_parameters.angle_step = angleStep; %30;
 
+disp(fb_parameters)
 %set contrast-adaptation parameter
 alpha = -0.05;
 
