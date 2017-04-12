@@ -4,6 +4,8 @@
 %}
 
 %#!/usr/bin/octave -qfW
+close all
+clear all
 pkg load image
 %close all
 arg_list = argv ();
