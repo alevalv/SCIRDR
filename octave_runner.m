@@ -17,7 +17,7 @@ for imageId =1:2
     filename=strcat(num2str(imageId));
     I = imread(strcat(imageDirectory, '/', filename, '.tif'));
     GT = imread(strcat(groundTruthDirectory, '/', filename, '.gif'));
-                        % sigma1start sigma2end   sigma1step     sigma2start sigma2end    sigma2step     kstart      kend        kstep   anglestep
+                        % sigma1start sigma2end sigma1step sigma2start sigma2end sigma2step kstart kend kstep anglestep threshold
     confMatrix = runme(I, GT, filename, [getArg(3) getArg(4)], getArg(5), [getArg(6) getArg(7)], getArg(8), [getArg(9) getArg(10)], getArg(11), getArg(12), getArg(13));
     fprintf(outputFile, '%d,%d,%d,%d\n', confMatrix(1), confMatrix(2), confMatrix(3), confMatrix(4));
 end

@@ -4,4 +4,5 @@ octave-workspace
 *.png
 input/
 run*.txt
+scirdr.dagman
 

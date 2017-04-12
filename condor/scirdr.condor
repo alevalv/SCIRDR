@@ -1,7 +1,7 @@
 universe                = docker
 docker_image            = 192.168.28.50:5000/octaveimage2/uv
 executable              = /bin/bash
-arguments               = runner.sh octave_runner.m input 2 4 1 2 3 1 -0.1 0.1 0.05 30
+arguments               = runner.sh octave_runner.m input input/groundTruth $(sigma1start) $(sigma2end) $(sigma1step) $(sigma2start) $(sigma2end) $(sigma2step) $(kstart) $(kend) $(kstep) $(anglestep) $(threshold)
 should_transfer_files   = YES
 transfer_input_files    = runner.sh,octave_runner.m,input,runme.m,SCIRD.m,create_SCIRD_fb.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m
 #transfer_output_files   = otro/*.png
