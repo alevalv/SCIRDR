@@ -1,9 +1,10 @@
 %Toy example: apply SCIRD to corneal nerve fibres captured with IVCM
 %single layer grayscale single precision
-function runme(I, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep)
+function confusionMatrix = runme(I, GT, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, segmentationThreshold)
 
 
 I = single(I(:,:,1));
+GT = single(I(:,:,1));
 
 %ridges color 'black' or 'white'
 ridges_color = 'white';
@@ -17,7 +18,6 @@ fb_parameters.k = k; %[-0.1 0.1];
 fb_parameters.k_step = kStep; %0.05;
 fb_parameters.angle_step = angleStep; %30;
 
-disp(fb_parameters)
 %set contrast-adaptation parameter
 alpha = -0.05;
 
@@ -31,13 +31,12 @@ alpha = -0.05;
 %figure,imshow(ALLfiltered(:,:,10),[])
 
 %show SCIRD result
-
 %figure,imshow(outIm,[])
 newImage = outIm;
-newImage(outIm<2) = 0;
-newImage(outIm>=2) = 255;
-%figure,imshow(newImage, [])
-imwrite(newImage, strcat('output.',filename));
+newImage(outIm<segmentationThreshold) = 0;
+newImage(outIm>=segmentationThreshold) = 255;
+%imwrite(newImage, strcat('output.',filename, '.png'));
+confusionMatrix = compare_image(newImage, GT);
 
 %the following three lines prints the result of each filter
 %for print_image_id = 1:size(ALLfiltered,3)
@@ -49,4 +48,3 @@ imwrite(newImage, strcat('output.',filename));
 %for print_image_id = 1:size(normalised_filters, 2)
 %    imwrite(normalised_filters{1, print_image_id}, strcat('filter', num2str(print_image_id), '.png'));
 %end
-

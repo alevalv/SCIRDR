@@ -2,4 +2,6 @@ output*
 .vscode/
 octave-workspace
 *.png
+input/
+run*.txt
 
