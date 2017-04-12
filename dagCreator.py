@@ -2,7 +2,7 @@
 #generates a list of dagman jobs, this is a combinatory problem.
 import numpy as np
 JOB = 'JOB {} scirdr.condor\n'
-VARIABLES = 'VARS {0} sigma1start="{1}"\nVARS {0} sigma2end="{2}"\nVARS {0} sigma1step="{3}"\nVARS {0} sigma2start="{4}"\nVARS {0} sigma2end="{5}"\nVARS {0} sigma2step="{6}"\nVARS {0} kstart="{7}"\nVARS {0} kend="{8}"\nVARS {0} kstep="{9}"\nVARS {0} anglestep="{10}"\nVARS {0} threshold="{11}"'
+VARIABLES = 'VARS {0} sigma1start="{1}"\nVARS {0} sigma1end="{2}"\nVARS {0} sigma1step="{3}"\nVARS {0} sigma2start="{4}"\nVARS {0} sigma2end="{5}"\nVARS {0} sigma2step="{6}"\nVARS {0} kstart="{7}"\nVARS {0} kend="{8}"\nVARS {0} kstep="{9}"\nVARS {0} anglestep="{10}"\nVARS {0} threshold="{11}"'
 
 currentjob = 1
 jobs = ""
@@ -29,7 +29,7 @@ for kstart in np.arange(-2, -0.25, 0.25):
         variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, kstart, kend, kstep, anglestep, threshold)
         variables += '\n'
         currentjob+=1
-dagmanFile = open('scirdr.dagman', 'w')
+dagmanFile = open('scirdr.dag', 'w')
 dagmanFile.write(jobs)
 dagmanFile.write('\n')
 dagmanFile.write(variables)
