@@ -10,4 +10,5 @@ output                  = out.$(Process)
 error                   = err.$(Process)
 log                     = log.$(Process)
 #Requirements = ((Machine != "mech-02.cloud.univalle.edu.co") && (Machine != "uvcluster-08.cloud.univalle.edu.co"))
+request_memory          = 2048M
 queue 1
