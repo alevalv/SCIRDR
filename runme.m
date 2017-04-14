@@ -4,7 +4,6 @@ function confusionMatrix = runme(I, GT, filename, sigma1, sigma1Step, sigma2, si
 
 
 I = single(I(:,:,1));
-GT = single(I(:,:,1));
 
 %ridges color 'black' or 'white'
 ridges_color = 'white';
