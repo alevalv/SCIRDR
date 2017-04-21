@@ -14,21 +14,27 @@ variables = ""
 #            for sigma2start in range(2, 6):
 #                for sigma2end in range(4, 8):
                    #for sigma2step in np.arange(1, 1):
-for kstart in np.arange(-2, -0.25, 0.25):
-    for kend in np.arange(0.25, 2, 0.25):
-        kstep = 0.05
-        anglestep = 30
-        threshold = 1
-        sigma1step = 1
-        sigma2step = 1
-        sigma1start = 2
-        sigma1end = 4
-        sigma2start = 2
-        sigma2end = 3
-        jobs += JOB.format('SCIRDR'+str(currentjob))
-        variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, kstart, kend, kstep, anglestep, threshold)
-        variables += '\n'
-        currentjob+=1
+for kstart in np.arange(1, 3, 0.10):
+    for kend in np.arange(1, 3, 0.10):
+        if kstart > kend:
+            break
+        for sigma1start in range(9, 14, 1):
+            for sigma1end in range(10, 15, 1):
+                if sigma1start >= sigma1end:
+                    break
+                for sigma2start in range(9, 14, 1):
+                    for sigma2end in range(10, 15, 1):
+                        if sigma2start >= sigma2end:
+                            break
+                        kstep = 0.05
+                        anglestep = 30
+                        threshold = 0.5
+                        sigma1step = 1
+                        sigma2step = 1
+                        jobs += JOB.format('SCIRDR'+str(currentjob))
+                        variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, kstart, kend, kstep, anglestep, threshold)
+                        variables += '\n'
+                        currentjob+=1
 dagmanFile = open('scirdr.dag', 'w')
 dagmanFile.write(jobs)
 dagmanFile.write('\n')

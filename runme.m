@@ -1,10 +1,10 @@
 %Toy example: apply SCIRD to corneal nerve fibres captured with IVCM
 %single layer grayscale single precision
-function confusionMatrix = runme(I, GT, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, segmentationThreshold)
+function confusionMatrix = runme(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, segmentationThreshold)
 
 
-I = single(I(:,:,1));
-
+I = preprocesar(Image(:,:,1), Mask);
+I = single(I);
 %ridges color 'black' or 'white'
 ridges_color = 'white';
 

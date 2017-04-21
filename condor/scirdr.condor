@@ -1,14 +1,14 @@
 universe                = docker
 docker_image            = 192.168.28.50:5000/octaveimage2/uv
 executable              = /bin/bash
-arguments               = runner.sh octave_runner.m input input/groundTruth $(sigma1start) $(sigma1end) $(sigma1step) $(sigma2start) $(sigma2end) $(sigma2step) $(kstart) $(kend) $(kstep) $(anglestep) $(threshold)
+arguments               = runner.sh octave_runner.m input input/groundTruth input/mask $(sigma1start) $(sigma1end) $(sigma1step) $(sigma2start) $(sigma2end) $(sigma2step) $(kstart) $(kend) $(kstep) $(anglestep) $(threshold)
 should_transfer_files   = YES
-transfer_input_files    = runner.sh,octave_runner.m,input,runme.m,SCIRD.m,create_SCIRD_fb.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m,compare_image.m
+transfer_input_files    = runner.sh,octave_runner.m,input,runme.m,SCIRD.m,create_SCIRD_fb.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m,compare_image.m,preprocesar.m
 #transfer_output_files   = otro/*.png
 when_to_transfer_output = ON_EXIT
 output                  = out.$(Process)
 error                   = err.$(Process)
 log                     = log.$(Process)
-Requirements            = ((Machine != "mech-02.cloud.univalle.edu.co") && (Machine != "uvcluster-08.cloud.univalle.edu.co"))
+#Requirements            = ((Machine != "mech-02.cloud.univalle.edu.co") && (Machine != "uvcluster-08.cloud.univalle.edu.co"))
 request_memory          = 2048M
 queue 1
