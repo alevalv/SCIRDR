@@ -14,9 +14,9 @@ variables = ""
 #            for sigma2start in range(2, 6):
 #                for sigma2end in range(4, 8):
                    #for sigma2step in np.arange(1, 1):
-for k1start in np.arange(-1.0, 1.0, 0.20):
-    for k1end in np.arange(0.0, 2.0, 0.20):
-        if k1start > k1end:
+for k2start in np.arange(-0.6, 0.5, 0.1):
+    for k2end in np.arange(-0.2, 1.0, 0.1):
+        if k2start > k2end:
             break
         for sigma1start in range(1, 5, 1):
             for sigma1end in range(2, 6, 1):
@@ -26,20 +26,18 @@ for k1start in np.arange(-1.0, 1.0, 0.20):
                     for sigma2end in range(3, 7, 1):
                         if sigma2start >= sigma2end:
                             break
-                        for k2start in np.arange(-2.0, 1.0, 0.10):
-                            for k2end in np.arange(0.0, 3.0, 0.10):
-                                if k2start > k2end:
-                                    break
-                                k1step = 0.05
-                                k2step = 0.05
-                                anglestep = 30
-                                threshold = 0.5
-                                sigma1step = 1
-                                sigma2step = 1
-                                jobs += JOB.format('SCIRDR'+str(currentjob))
-                                variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, k1start, k1end, k1step, k2start, k2end, k2step, anglestep, threshold)
-                                variables += '\n'
-                                currentjob+=1
+                        k1start = -0.1
+                        k1end = 0.1
+                        k1step = 0.05
+                        k2step = 0.05
+                        anglestep = 30
+                        threshold = 0.5
+                        sigma1step = 1
+                        sigma2step = 1
+                        jobs += JOB.format('SCIRDR'+str(currentjob))
+                        variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, k1start, k1end, k1step, k2start, k2end, k2step, anglestep, threshold)
+                        variables += '\n'
+                        currentjob+=1
 dagmanFile = open('scirdrk.dag', 'w')
 dagmanFile.write(jobs)
 dagmanFile.write('\n')
