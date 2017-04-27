@@ -1,4 +1,4 @@
-function [outIm_SCIRD, properties, ALLfiltered] = SCIRD(I,alpha,ridges_color, fb_parameters)
+function [outIm_SCIRD, properties, ALLfiltered] = SCIRDK(I,alpha,ridges_color, fb_parameters)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
@@ -77,7 +77,7 @@ I = medfilt2(I,[3 3],'symmetric');
 %% create SCIRD filter bank
 disp('Creating SCIRD filter bank...')
 time_2_create_SCIRD_fb_start = tic;
-[SCIRD_filters, properties, num_kernels] = create_SCIRD_fb(fb_parameters.sigma_1,fb_parameters.sigma_1_step, fb_parameters.sigma_2,fb_parameters.sigma_2_step, fb_parameters.k_1, fb_parameters.k_1_step, fb_parameters.k_2, fb_parameters.k_2_step, fb_parameters.angle_step);
+[SCIRD_filters, properties, num_kernels] = create_SCIRD_fbk(fb_parameters.sigma_1,fb_parameters.sigma_1_step, fb_parameters.sigma_2,fb_parameters.sigma_2_step, fb_parameters.k_1, fb_parameters.k_1_step, fb_parameters.k_2, fb_parameters.k_2_step, fb_parameters.angle_step);
 time_2_create_SCIRD_fb_end = toc(time_2_create_SCIRD_fb_start);
 disp(['Time to create the SCIRD filter bank = ',num2str(time_2_create_SCIRD_fb_end)])
 

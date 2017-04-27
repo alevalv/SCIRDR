@@ -1,6 +1,6 @@
 %Toy example: apply SCIRD to corneal nerve fibres captured with IVCM
 %close all
-clear all
+function confusionMatrix = runmek(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k1, k1Step, k2, k2step, angleStep, segmentationThreshold)
 
 I = imread('9.png');
 %I = imread('3.png');
@@ -12,21 +12,21 @@ I = single(I(:,:,1));
 ridges_color = 'white';
 
 %set filter bank parameters
-fb_parameters.sigma_1 = [2 4];
-fb_parameters.sigma_1_step = 1;
-fb_parameters.sigma_2 = [2 3];
-fb_parameters.sigma_2_step = 1;
-fb_parameters.k_1 = [-0.1 0.1];
-fb_parameters.k_1_step = 0.05;
-fb_parameters.k_2 = [3 6];
-fb_parameters.k_2_step = 0.5;
-fb_parameters.angle_step = 30;
+fb_parameters.sigma_1 = sigma1;%[2 4];
+fb_parameters.sigma_1_step = sigma1Step; %1;
+fb_parameters.sigma_2 = sigma2;%[2 3];
+fb_parameters.sigma_2_step = sigma2Step; %1;
+fb_parameters.k_1 = k1;
+fb_parameters.k_1_step = k1Step;
+fb_parameters.k_2 = k2;
+fb_parameters.k_2_step = k2step;
+fb_parameters.angle_step = angleStep; %30;
 
 %set contrast-adaptation parameter
 alpha = -0.05;
 
 %apply SCIRD
-[outIm, properties, ALLfiltered] = SCIRD(I,alpha,ridges_color,fb_parameters);
+[outIm, properties, ALLfiltered] = SCIRDK(I,alpha,ridges_color,fb_parameters);
 
 %show original image
 %figure,imshow(I,[])
