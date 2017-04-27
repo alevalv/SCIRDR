@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #generates a list of dagman jobs, this is a combinatory problem.
 import numpy as np
-JOB = 'JOB {} scirdr.condor\n'
+JOB = 'JOB {} scirdrk.condor\n'
 VARIABLES = 'VARS {0} sigma1start="{1}"\nVARS {0} sigma1end="{2}"\nVARS {0} sigma1step="{3}"\nVARS {0} sigma2start="{4}"\nVARS {0} sigma2end="{5}"\nVARS {0} sigma2step="{6}"\nVARS {0} k1start="{7}"\nVARS {0} k1end="{8}"\nVARS {0} k1step="{9}"\nVARS {0} k2start="{10}"\nVARS {0} k2end="{11}"\nVARS {0} k2step="{12}"\nVARS {0} anglestep="{13}"\nVARS {0} threshold="{14}"'
 
 currentjob = 1
@@ -34,8 +34,8 @@ for k2start in np.arange(-0.6, 0.5, 0.1):
                         threshold = 0.5
                         sigma1step = 1
                         sigma2step = 1
-                        jobs += JOB.format('SCIRDR'+str(currentjob))
-                        variables += VARIABLES.format('SCIRDR'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, k1start, k1end, k1step, k2start, k2end, k2step, anglestep, threshold)
+                        jobs += JOB.format('SCIRDRK'+str(currentjob))
+                        variables += VARIABLES.format('SCIRDRK'+str(currentjob), sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, k1start, k1end, k1step, k2start, k2end, k2step, anglestep, threshold)
                         variables += '\n'
                         currentjob+=1
 dagmanFile = open('scirdrk.dag', 'w')
