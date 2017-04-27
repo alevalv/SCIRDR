@@ -8,7 +8,7 @@ import os
 
 
 w, h = 4, 20;
-confusion_file = [[0 for x in range(w)] for y in range(h)] 
+confusion_file = [[0 for x in range(w)] for y in range(h)]
 files=[]
 best_accuracy=[]
 best_error=[]
@@ -16,7 +16,7 @@ best_file=[]
 
 def readFile(file):
     read_file = open(file, "r")
-    
+
     for j in range (0,20):
         line=read_file.readline()
         confusion_matrix_image=line.split(",")
@@ -25,8 +25,8 @@ def readFile(file):
         confusion_file[j][1]=int(confusion_matrix_image[1])
         confusion_file[j][2]=int(confusion_matrix_image[2])
         confusion_file[j][3]=int((confusion_matrix_image[3].split("\n"))[0])
-        
-        
+
+
 
 def obtainAccuracyAndError(file):
     i=0
@@ -70,7 +70,7 @@ def cargar(args):
         for y in glob.glob(str(x)):
             files_all_dir.append(y)
     return files_all_dir
-            
+
 
 
 
@@ -79,9 +79,9 @@ if __name__ == "__main__":
         i=0
         init()
         parameter_list = sys.argv
-        print(parameter_list[1])
+
         directory_path = os.path.abspath(str(parameter_list[1]))
-        
+        print(directory_path)
         dirs=[]
         import os
         for dirname, dirnames, filenames in os.walk(directory_path):
@@ -93,10 +93,9 @@ if __name__ == "__main__":
                 files.append(files_directory)
                 readFile(files_directory)
                 obtainAccuracyAndError(files_directory)
-                confusion_file = [[0 for x in range(w)] for y in range(h)] 
+                confusion_file = [[0 for x in range(w)] for y in range(h)]
                 i=i+1
         bestFiles()
         print("\n")
 
 
-    
