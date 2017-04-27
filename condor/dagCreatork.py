@@ -28,6 +28,8 @@ for k1start in np.arange(-1.0, 1.0, 0.20):
                             break
                         for k2start in np.arange(-2.0, 1.0, 0.10):
                             for k2end in np.arange(0.0, 3.0, 0.10):
+                                if k2start > k2end:
+                                    break
                                 k1step = 0.05
                                 k2step = 0.05
                                 anglestep = 30
