@@ -1,0 +1,12 @@
+universe                = docker
+docker_image            = 192.168.28.50:5000/octaveimage2/uv
+executable              = /bin/bash
+arguments               = runner.sh octave_runnerk.m input input/groundTruth input/mask $(sigma1start) $(sigma1end) $(sigma1step) $(sigma2start) $(sigma2end) $(sigma2step) $(k1start) $(k1end) $(k1step) $(k2start) $(k2end) $(k2step) $(anglestep) $(threshold)
+should_transfer_files   = YES
+transfer_input_files    = runner.sh,octave_runner.m,input,runmek.m,SCIRDK.m,create_SCIRD_fbk.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m,compare_image.m,preprocesar.m
+when_to_transfer_output = ON_EXIT
+output                  = out.$(Process)
+error                   = err.$(Process)
+log                     = log.$(Process)
+request_memory          = 2048M
+queue 1
