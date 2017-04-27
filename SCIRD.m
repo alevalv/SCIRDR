@@ -1,4 +1,4 @@
-function [outIm_SCIRD, properties, ALLfiltered, SCIRD_filters] = SCIRD(I,alpha,ridges_color, fb_parameters)
+function [outIm_SCIRD, properties, ALLfiltered] = SCIRD(I,alpha,ridges_color, fb_parameters)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
@@ -6,18 +6,18 @@ function [outIm_SCIRD, properties, ALLfiltered, SCIRD_filters] = SCIRD(I,alpha,r
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% SCIRD   This function implements the Scale and Curvature Invariant Ridge
+% SCIRD   This function implements the Scale and Curvature Invariant Ridge 
 %         Detector (SCIRD) described in [1].
-%
+%         
 % Input:
 %
 %     I          image to be filtered. It should be grayscale (single layer).
-%
-%   alpha        controls the balance between contrast and
-%                filter bank response (max). It should be positive if
+%     
+%   alpha        controls the balance between contrast and 
+%                filter bank response (max). It should be positive if 
 %                structures of interest are poorly contrasted. Otherwise, it
 %                should be negative to reduce noise. Set it to 0 as default.
-%
+%             
 % ridges_color   specifies if structures of interest are black or white.
 %
 % fb_parameters  contains the parameters of the filter bank to be used.
@@ -33,31 +33,31 @@ function [outIm_SCIRD, properties, ALLfiltered, SCIRD_filters] = SCIRD(I,alpha,r
 %                negative curvature values (e.g. [-0.1 0.1]) is equivalent
 %                to 0:360-angle_step and k=[0 0.1]. Here we use the
 %                solution with negative curvature values (see below).
-%
+% 
 % Output:
 %
 %  outIm_SCIRD   filtered/enhanced image.
-%
-%  properties    contains parameters of SCIRD filters generated in the
-%                current setting. For instance, properties(10) contains
+%     
+%  properties    contains parameters of SCIRD filters generated in the 
+%                current setting. For instance, properties(10) contains 
 %                all the parameters of the 10th filter.
-%
-%  ALLfiltered   responsed of SCIRD filter bank before soft thresholding and
-%                contrast adaptation. Access the 10th response with
+%     
+%  ALLfiltered   responsed of SCIRD filter bank before soft thresholding and   
+%                contrast adaptation. Access the 10th response with 
 %                ALLfiltered(:,:,10)
 %
 % Usage: refer to the toy example in "runme.m"
 %
 %**************************************************************************
-%  author: Roberto Annunziata, School of Computing, University of Dundee
+%  author: Roberto Annunziata, School of Computing, University of Dundee 
 %  e-mail: r.annunziata@dundee.ac.uk or r_o_b_e_r_t_o@hotmail.it
 %  web: http://staff.computing.dundee.ac.uk/rannunziata/
 %  date: May 2015
 %
 %  If you use this code in your project, please cite [1].
-%
-% [1] R. Annunziata, A. Kheirkhah, P. Hamrah, E. Trucco, "Scale and
-%     Curvature Invariant Ridge Detector for Tortuous and Fragmented
+%        
+% [1] R. Annunziata, A. Kheirkhah, P. Hamrah, E. Trucco, "Scale and 
+%     Curvature Invariant Ridge Detector for Tortuous and Fragmented 
 %     Structures", MICCAI, 2015.
 %**************************************************************************
 
@@ -72,18 +72,19 @@ else
     end
 end
 
-I = medfilt2(I,[3 3],'symmetric');
+I = medfilt2(I,[3 3],'symmetric');                         
 
 %% create SCIRD filter bank
 disp('Creating SCIRD filter bank...')
 time_2_create_SCIRD_fb_start = tic;
-[SCIRD_filters, properties, num_kernels] = create_SCIRD_fb(fb_parameters.sigma_1,fb_parameters.sigma_1_step, fb_parameters.sigma_2,fb_parameters.sigma_2_step, fb_parameters.k, fb_parameters.k_step, fb_parameters.angle_step);
+[SCIRD_filters, properties, num_kernels] = create_SCIRD_fb(fb_parameters.sigma_1,fb_parameters.sigma_1_step, fb_parameters.sigma_2,fb_parameters.sigma_2_step, fb_parameters.k_1, fb_parameters.k_1_step, fb_parameters.k_2, fb_parameters.k_2_step, fb_parameters.angle_step);
 time_2_create_SCIRD_fb_end = toc(time_2_create_SCIRD_fb_start);
 disp(['Time to create the SCIRD filter bank = ',num2str(time_2_create_SCIRD_fb_end)])
+
 %% apply SCIRD filter bank
 disp('Applying SCIRD...')
 time_2_run_SCIRD_start = tic;
-ALLfiltered = single(zeros(size(I,1),size(I,2),num_kernels)); %%convert to single precision
+ALLfiltered = single(zeros(size(I,1),size(I,2),num_kernels));
 for all_ind = 1:num_kernels
     ALLfiltered(:,:,all_ind) = single(imfilter(I,SCIRD_filters{all_ind},'conv','symmetric'));
 end
