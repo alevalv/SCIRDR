@@ -1,7 +1,6 @@
 close all;
 clear all;
 
-
 I = imread('input/1.tif');
 GT = imread('input/groundTruth/1.gif');
 mask = imread ('input/mask/1.gif');
