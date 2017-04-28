@@ -1,1 +1,9 @@
-function runner(directory, sigma1start, sigma1end, sigma1step, sigma2start, sigma2end, sigma2step, kstart, kend, kstep, anglestep)
+close all;
+clear all;
+
+
+I = imread('input/1.tif');
+GT = imread('input/groundTruth/1.gif');
+mask = imread ('input/mask/1.gif');
+
+confusionMatrix = runme(I, GT, mask, 'outputimage.png', [2 4], 1, [2 3], 1, [-0.1 0.1], 0.05, 30, 0.5);

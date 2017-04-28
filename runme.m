@@ -9,13 +9,13 @@ I = single(I);
 ridges_color = 'white';
 
 %set filter bank parameters
-fb_parameters.sigma_1 = sigma1;%[2 4];
-fb_parameters.sigma_1_step = sigma1Step; %1;
-fb_parameters.sigma_2 = sigma2;%[2 3];
-fb_parameters.sigma_2_step = sigma2Step; %1;
-fb_parameters.k = k; %[-0.1 0.1];
-fb_parameters.k_step = kStep; %0.05;
-fb_parameters.angle_step = angleStep; %30;
+fb_parameters.sigma_1 = sigma1;
+fb_parameters.sigma_1_step = sigma1Step;
+fb_parameters.sigma_2 = sigma2;
+fb_parameters.sigma_2_step = sigma2Step;
+fb_parameters.k = k;
+fb_parameters.k_step = kStep;
+fb_parameters.angle_step = angleStep;
 
 %set contrast-adaptation parameter
 alpha = -0.05;
@@ -23,7 +23,6 @@ alpha = -0.05;
 %apply SCIRD
 [outIm, filterProperties, ~, filters] = SCIRD(I,alpha,ridges_color,fb_parameters);
 
-filterProperties
 %show original image
 %figure,imshow(I,[])
 
@@ -44,7 +43,7 @@ confusionMatrix = compare_image(newImage, GT);
 %end
 
 %the following three lines prints the SCIRD filters, normalising them before
-[normalised_filters, filenames] = print_SCIRD(SCIRD_filters, filterProperties);
+[normalised_filters, filenames] = print_SCIRD(filters, filterProperties);
 for print_image_id = 1:size(normalised_filters, 2)
     imwrite(normalised_filters{1, print_image_id}, filenames{1, print_image_id});
 end
