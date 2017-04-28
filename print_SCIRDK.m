@@ -1,4 +1,4 @@
-function [images, filenames] = print_SCIRD(filters, properties)
+function [images, filenames] = print_SCIRDK(filters, properties)
 %print_SCIRD - prints the kernel filters
 %
 % Syntax: images = print_SCIRD(filters, properties)
@@ -10,5 +10,5 @@ for filters_ind = 1:size(filters, 2)
     dimension = size(filters{1, filters_ind}, 1);
     normalized = (vector - min(vector)) / (max(vector) - min(vector));
     images{filters_ind} = vec2mat(normalized, dimension);
-    filenames{filters_ind} = strcat(num2str(properties(filters_ind).s1), '_', num2str(properties(filters_ind).s2), '_', num2str(properties(filters_ind).k), '_', num2str(properties(filters_ind).angle), '.png');
+    filenames{filters_ind} = strcat('sa', num2str(properties(filters_ind).s1), '_sb', num2str(properties(filters_ind).s2), '_ka', num2str(properties(filters_ind).k1), '_kb', num2str(properties(filters_ind).k2),'_a', num2str(properties(filters_ind).angle), '.png');
 end

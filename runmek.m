@@ -26,7 +26,7 @@ fb_parameters.angle_step = angleStep; %30;
 alpha = -0.05;
 
 %apply SCIRD
-[outIm, ~, ~] = SCIRDK(I,alpha,ridges_color,fb_parameters);
+[outIm, filterProperties, ~, SCIRD_filters] = SCIRDK(I,alpha,ridges_color,fb_parameters);
 
 %show original image
 %figure,imshow(I,[])
@@ -41,3 +41,7 @@ confusionMatrix = compare_image(outIm, GT);
 %imwrite(outIm,'../Imagenes_pruebas/1/1_3.png')
 %figure,imwrite(outIm,'../Imagenes_pruebas/1/1_3.png','BitDepth',16)
 
+%[normalised_filters, filenames] = print_SCIRDK(SCIRD_filters, filterProperties);
+%for print_image_id = 1:size(normalised_filters, 2)
+%    imwrite(normalised_filters{1, print_image_id}, filenames{1, print_image_id});
+%end

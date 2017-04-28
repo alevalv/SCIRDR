@@ -71,7 +71,8 @@ for i_s1 = sigma_1(1):sigma_1_step:sigma_1(end)
                         %store properties related to the current kernel
                         properties(all_ind).s1 = i_s1;
                         properties(all_ind).s2 = i_s2;
-                        properties(all_ind).k = i_k_1;
+                        properties(all_ind).k1 = i_k_1;
+                        properties(all_ind).k2 = i_k_2;
                         properties(all_ind).angle = angle;
 
                     end

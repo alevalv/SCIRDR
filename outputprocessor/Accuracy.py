@@ -83,11 +83,7 @@ if __name__ == "__main__":
         directory_path = os.path.abspath(str(parameter_list[1]))
         print(directory_path)
         dirs=[]
-        import os
-        for dirname, dirnames, filenames in os.walk(directory_path):
-            for subdirname in dirnames:
-                dir = os.path.join(dirname, subdirname)
-                dirs.append(dir+"/*.txt")
+        dirs.append(directory_path+"/*.txt")
         files_all_directories=cargar(dirs)
         for files_directory in files_all_directories:
                 files.append(files_directory)

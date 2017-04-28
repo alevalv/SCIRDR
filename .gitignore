@@ -5,4 +5,4 @@ octave-workspace
 input/
 run*.txt
 scirdr*.dag
-
+.directory

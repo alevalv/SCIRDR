@@ -1,4 +1,4 @@
-function [outIm_SCIRD, properties, ALLfiltered] = SCIRDK(I,alpha,ridges_color, fb_parameters)
+function [outIm_SCIRD, properties, ALLfiltered, SCIRD_filters] = SCIRDK(I,alpha,ridges_color, fb_parameters)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
