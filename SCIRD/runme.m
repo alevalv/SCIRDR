@@ -43,7 +43,7 @@ confusionMatrix = compare_image(newImage, GT);
 %end
 
 %the following three lines prints the SCIRD filters, normalising them before
-[normalised_filters, filenames] = print_SCIRD(SCIRD_filters, filterProperties);
-for print_image_id = 1:size(normalised_filters, 2)
-    imwrite(normalised_filters{1, print_image_id}, filenames{1, print_image_id});
-end
+%[normalised_filters, filenames] = print_SCIRD(SCIRD_filters, filterProperties);
+%for print_image_id = 1:size(normalised_filters, 2)
+%    imwrite(normalised_filters{1, print_image_id}, filenames{1, print_image_id});
+%end
