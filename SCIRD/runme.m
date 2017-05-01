@@ -21,7 +21,7 @@ fb_parameters.angle_step = angleStep;
 alpha = -0.05;
 
 %apply SCIRD
-[outIm, filterProperties, ~, SCIRD_filters] = SCIRD(I,alpha,ridges_color,fb_parameters);
+[outIm, ~, ~, ~] = SCIRD(I,alpha,ridges_color,fb_parameters);
 
 %show original image
 %figure,imshow(I,[])
@@ -31,9 +31,7 @@ alpha = -0.05;
 
 %show SCIRD result
 %figure,imshow(outIm,[])
-newImage = outIm;
-newImage(outIm<segmentationThreshold) = 0;
-newImage(outIm>=segmentationThreshold) = 255;
+newImage = mat2gray(outIm);
 %imwrite(newImage, strcat('output.',filename, '.png'));
 confusionMatrix = compare_image(newImage, GT);
 

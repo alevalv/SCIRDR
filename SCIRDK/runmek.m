@@ -35,7 +35,8 @@ alpha = -0.05;
 %show the result obtained applying the 10th filter in the filter bank
 %figure,imshow(ALLfiltered(:,:,10),[])
 %imwrite(ALLfiltered(:,:,10),"../Imagenes_pruebas/1/1_2.png")
-confusionMatrix = compare_image(outIm, GT);
+segmentatedImage = mat2gray(outIm);
+confusionMatrix = compare_image(segmentatedImage, GT);
 %show SCIRD result
 %figure,imshow(outIm,[])
 %imwrite(outIm,'../Imagenes_pruebas/1/1_3.png')

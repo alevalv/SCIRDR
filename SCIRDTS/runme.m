@@ -1,4 +1,4 @@
-function confusionMatrix = runme(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, filterSize)
+function [confusionMatrix, segmentatedImage] = runme(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, filterSize)
 
 %single layer grayscale single precision (green channel selected here)
 I = single(Image(:,:,2));
@@ -26,8 +26,11 @@ alpha = 0.1;
 mask = imerode(Mask,strel('disk',10, 0));
 outIm(mask==0)=0;
 
+
 confusionMatrix = compare_image(outIm, GT);
 
-figure,imshow(outIm,[])
+%figure,imshow(outIm,[])
 
-imwrite(outIm, strcat('output.',filename, '.png'));
+segmentatedImage = mat2gray(outIm);
+
+imwrite(segmentatedImage, strcat('output.',filename, '.png'));
