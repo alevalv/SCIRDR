@@ -26,15 +26,20 @@ fb_parameters.angle_step = angleStep; %30;
 alpha = -0.05;
 
 %apply SCIRD
-[outIm, filterProperties, ~, SCIRD_filters] = SCIRDK(I,alpha,ridges_color,fb_parameters);
+[outIm, ~, ALLfiltered, ~] = SCIRDK(I,alpha,ridges_color,fb_parameters);
 
 %show original image
 %figure,imshow(I,[])
 %imwrite(I,"../Imagenes_pruebas/1/1_1.png")
 
 %show the result obtained applying the 10th filter in the filter bank
-%figure,imshow(ALLfiltered(:,:,10),[])
-%imwrite(ALLfiltered(:,:,10),"../Imagenes_pruebas/1/1_2.png")
+res = ALLfiltered(:,:,10);
+
+trythreshold(res)
+
+figure,imwrite(res,'img1.png')
+
+%imwrite(resLLfiltered(:,:,10),"../Imagenes_pruebas/1/1_2.png")
 segmentatedImage = mat2gray(outIm);
 confusionMatrix = compare_image(segmentatedImage, GT);
 %show SCIRD result
