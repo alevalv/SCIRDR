@@ -20,7 +20,7 @@ fb_parameters.filter_size = filterSize;%21;
 alpha = 0.1;
 
 %apply SCIRD_TS
-[outIm, ~, ALLfiltered] = SCIRD_TS(I,alpha,ridges_color,fb_parameters);
+[outIm, filterProperties, ~, filters] = SCIRD_TS(I,alpha,ridges_color,fb_parameters);
 
 %masking
 mask = imerode(Mask,strel('disk',10, 0));
@@ -34,3 +34,9 @@ confusionMatrix = compare_image(outIm, GT);
 segmentatedImage = mat2gray(outIm);
 
 imwrite(segmentatedImage, strcat('output.',filename, '.png'));
+
+%the following three lines prints the SCIRD filters, normalising them before
+%[normalised_filters, filenames] = print_SCIRD(filters, filterProperties);
+%for print_image_id = 1:size(normalised_filters, 2)
+%    imwrite(normalised_filters{1, print_image_id}, filenames{1, print_image_id});
+%end

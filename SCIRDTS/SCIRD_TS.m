@@ -1,4 +1,4 @@
-function [outIm_SCIRD_TS, properties, ALLfiltered] = SCIRD_TS(I,alpha,ridges_color, fb_parameters)
+function [outIm_SCIRD_TS, properties, ALLfiltered, SCIRD_TS_filters] = SCIRD_TS(I,alpha,ridges_color, fb_parameters)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
