@@ -5,19 +5,19 @@ function [] = Accelerated_CSC_filter_learning(resume_fb_no)
 %  Input:
 %     resume_fb_no (default=0)
 %     if you set resume_fb_no to 3, for instance, it will assume that
-%     the iteration 3 (corresponding to fb_000003) is completed and starts 
+%     the iteration 3 (corresponding to fb_000003) is completed and starts
 %     from iteration 4.
 
 %**************************************************************************
-%  Author: Roberto Annunziata, CVIP, University of Dundee, UK 
+%  Author: Roberto Annunziata, CVIP, University of Dundee, UK
 %  e-mail: r.annunziata@dundee.ac.uk or robertoannunziata@outlook.com
 %  web: http://staff.computing.dundee.ac.uk/rannunziata/
 %  date: May 2016
 %
 %  If you use this code in your project, please cite [1].
-%        
-% [1] R. Annunziata and E. Trucco, "Accelerating Convolutional Sparse Coding 
-%     for Curvilinear Structures Segmentation by Refining SCIRD-TS Filter Banks", 
+%
+% [1] R. Annunziata and E. Trucco, "Accelerating Convolutional Sparse Coding
+%     for Curvilinear Structures Segmentation by Refining SCIRD-TS Filter Banks",
 %     IEEE Transactions on Medical Imaging, 2016.
 %**************************************************************************
 
@@ -39,8 +39,8 @@ setup_directories(p,resume_fb_no);
 % Load the training data
 [imgs,masks] = load_dataset(p);
 
-filename_batch = 'results\fb_img\batch';
-filename_ws = 'results\fb_img\workspace';
+filename_batch = 'results/fb_img/batch';
+filename_ws = 'results/fb_img/workspace';
 
 if (resume_fb_no>0)
     %load batch
@@ -58,7 +58,7 @@ else
     stat.tot_time = 0;
     time_init = tic;
     % No filter bank has been specified, initialize it according to the
-    % parameters specified in the configuration structure 
+    % parameters specified in the configuration structure
     if strcmp(p.fb.initmethod,'SCIRD-TS')
         [fb] = initialize_known_filter_bank(p);
     else
@@ -81,12 +81,12 @@ save_filter_bank(p,fb,i_it-1);
  while (true)
 
     fprintf('  + iteration %d\n',i_it);
-    
+
     start_time = tic;
     stat.fobj_total=0;
     stat.fresidue_total=0;
     stat.fsparsity_total=0;
-    
+
     %iterate over the batch
     for i_b = 1:p.data.batch_size
         % Pick a random sample from the dataset
@@ -122,14 +122,14 @@ save_filter_bank(p,fb,i_it-1);
             dim = x - lmn;
             x = dim ./ lstd;
         end
-        
+
         % Initialize the feature maps
         for i_f = 1:p.fb.filters_no
-            t{i_f} = convnfft(x,fb{i_f},'same'); 
+            t{i_f} = convnfft(x,fb{i_f},'same');
         end
         % Optimize over the feature maps
-        t = fista(x,p,fb,t);   
-    
+        t = fista(x,p,fb,t);
+
         % Compute the residual for filter update
         rec_ft = compute_img_reconstruction(t,fb);
         res_ft = x-rec_ft;
@@ -154,31 +154,31 @@ save_filter_bank(p,fb,i_it-1);
         %stats
         rec_ft_obj = compute_img_reconstruction(t,fb);
         res_ft_obj = x-rec_ft_obj;
-        fresidue =  0.5*norm(res_ft_obj(:))^2; 
+        fresidue =  0.5*norm(res_ft_obj(:))^2;
         fsparsity =  p.learning.lambda_1 * norm_ft;
         fobj = 0.5*norm(res_ft_obj(:))^2 + p.learning.lambda_1 * norm_ft;
-        
+
         stat.fobj_total      = stat.fobj_total + fobj;
         stat.fresidue_total  = stat.fresidue_total + fresidue;
         stat.fsparsity_total = stat.fsparsity_total + fsparsity;
-        
+
         %save result
         save_filter_bank(p,fb,i_it);
     end
 
     % get statistics
-    Objective_avg(i_it)      = stat.fobj_total / p.data.batch_size 
+    Objective_avg(i_it)      = stat.fobj_total / p.data.batch_size
     stat.fobj_avg(i_it)      = stat.fobj_total / p.data.batch_size;
     stat.fresidue_avg(i_it)  = stat.fresidue_total / p.data.batch_size;
     stat.fsparsity_avg(i_it) = stat.fsparsity_total / p.data.batch_size;
     stat.elapsed_time(i_it)  = toc(start_time);
-    %time = initialization + batch 
+    %time = initialization + batch
     if i_it>1
         stat.tot_time(i_it)      = stat.tot_time(i_it-1) + stat.elapsed_time(i_it);
     else
         stat.tot_time(i_it)      = stat.init_time + stat.elapsed_time(i_it);
     end
-    
+
     save(filename_ws,'stat','p','fb','batch')
 
     %check convergence
@@ -188,7 +188,7 @@ save_filter_bank(p,fb,i_it-1);
             break
         end
     end
-    
+
     i_it = i_it + 1;
 end
 

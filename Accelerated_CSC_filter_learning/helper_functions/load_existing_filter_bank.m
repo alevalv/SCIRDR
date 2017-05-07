@@ -16,7 +16,7 @@ function [fb] = load_existing_filter_bank(p,resume_fb_no)
 %  date: June 2012
 %  last revision: 21 June 2012
 
-resume_fb_filename = ['results\fb_img\fb_txt\fb_',sprintf('%06d',resume_fb_no),'.txt'];%sprintf(p.results.fb_txt_fileformat,resume_fb_no);
+resume_fb_filename = ['results/fb_img/fb_txt/fb_',sprintf('%06d',resume_fb_no),'.txt'];%sprintf(p.results.fb_txt_fileformat,resume_fb_no);
 
 fb_file = load(resume_fb_filename);
 fb = cell(p.fb.filters_no,1);
