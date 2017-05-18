@@ -1,0 +1,12 @@
+universe                = docker
+docker_image            = 192.168.28.50:5000/octaveimage2/uv
+executable              = /bin/bash
+arguments               = runner.sh octave_runner.m
+should_transfer_files   = YES
+transfer_input_files    = runner.sh,octave_runner.m,Accelerated_CSC_filter_learning,datasets,helper_functions
+when_to_transfer_output = ON_EXIT
+output                  = out.1
+error                   = err.1
+log                     = log.1
+request_memory          = 4096M
+queue 1
