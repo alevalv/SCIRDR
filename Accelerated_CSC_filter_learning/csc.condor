@@ -4,6 +4,7 @@ executable              = /bin/bash
 arguments               = runner.sh octave_runner.m
 should_transfer_files   = YES
 transfer_input_files    = runner.sh,octave_runner.m,Accelerated_CSC_filter_learning.m,datasets,helper_functions
+transfer_output_files   = results
 when_to_transfer_output = ON_EXIT
 output                  = out.1
 error                   = err.1
