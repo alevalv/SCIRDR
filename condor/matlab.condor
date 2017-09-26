@@ -1,0 +1,13 @@
+universe                = docker
+docker_image            = registry.hub.docker.com/alevalv/docker-java-matlab
+executable              = ./run_Accelerated_CSC_filter_learning.sh
+arguments               = /opt/mcr/v901
+should_transfer_files   = YES
+transfer_input_files    = Accelerated_CSC_filter_learning,datasets,run_Accelerated_CSC_filter_learning.sh
+when_to_transfer_output = ON_EXIT
+transfer_output_files   = results
+environment             = "MCR_CACHE_VERBOSE=1 MCR_CACHE_ROOT=/tmp/matlab2016a MATLAB_PREFDIR=/tmp/matlab2016a"
+output                  = out
+error                   = err
+log                     = log
+queue 1
