@@ -1,0 +1,15 @@
+universe                = docker
+docker_image            = registry.hub.docker.com/alevalv/octave-image
+executable              = /bin/bash
+#dagman arguments (mutitasks)
+#arguments               = runner.sh scirdts_octave.m input/source input/groundTruth input/mask $(sigma1start) $(sigma1end) $(sigma1step) $(sigma2start) $(sigma2end) $(sigma2step) $(k1start) $(k1end) $(k1step) $(k2start) $(k2end) $(k2step) $(anglestep) $(threshold)
+#default implementation
+arguments               = runner.sh scirdts_octave.m input/source input/groundTruth input/mask 1 2 1 1 2 1 -0.1 0.1 0.05 15 21
+should_transfer_files   = YES
+transfer_input_files    = runner.sh,octave_runner.m,input,runmek.m,SCIRDK.m,create_SCIRD_fbk.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m,compare_image.m,preprocesar.m
+when_to_transfer_output = ON_EXIT
+output                  = out.$(Process)
+error                   = err.$(Process)
+log                     = log.$(Process)
+request_memory          = 2048M
+queue 1
