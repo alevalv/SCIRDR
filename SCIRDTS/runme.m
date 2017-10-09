@@ -1,4 +1,4 @@
-function [confusionMatrix, segmentatedImage] = runme(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, filterSize)
+function [segmentatedImage] = runme(Image, GT, Mask, filename, sigma1, sigma1Step, sigma2, sigma2Step, k, kStep, angleStep, filterSize)
 
 %single layer grayscale single precision (green channel selected here)
 I = single(Image(:,:,2));
@@ -20,20 +20,18 @@ fb_parameters.filter_size = filterSize;%21;
 alpha = 0.1;
 
 %apply SCIRD_TS
-[outIm, filterProperties, ~, filters] = SCIRD_TS(I,alpha,ridges_color,fb_parameters);
+[outIm, ~, ~, ~] = SCIRD_TS(I,alpha,ridges_color,fb_parameters);
 
 %masking
 mask = imerode(Mask,strel('disk',10, 0));
 outIm(mask==0)=0;
 
-
-confusionMatrix = compare_image(outIm, GT);
+%uncomment this if you want to check the confusion matrix of the given segmentation against the groundTruth image
+%confusionMatrix = compare_image(outIm, GT);
 
 %figure,imshow(outIm,[])
 
 segmentatedImage = mat2gray(outIm);
-
-imwrite(segmentatedImage, strcat('output.',filename, '.png'));
 
 %the following three lines prints the SCIRD filters, normalising them before
 %[normalised_filters, filenames] = print_SCIRD(filters, filterProperties);

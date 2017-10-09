@@ -8,4 +8,5 @@ for arg do
     arguments="$arguments $arg"
 done
 echo "call parameters:${arguments}"
+mkdir output
 /usr/bin/env octave -qfW $arguments
