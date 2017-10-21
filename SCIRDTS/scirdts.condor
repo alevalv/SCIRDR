@@ -7,9 +7,10 @@ executable              = /bin/bash
 arguments               = runner.sh scirdts_octave.m input/source input/groundTruth input/mask 1 2 1 1 2 1 -0.1 0.1 0.05 15 21
 should_transfer_files   = YES
 transfer_input_files    = runner.sh,scirdts_octave.m,input,runme.m,SCIRD_TS.m,create_SCIRD_TS_fb.m,gradient_magnitude.m,largestGradientMagnitudeoverscale.m,compare_image.m
+transfer_output_files   = output
 when_to_transfer_output = ON_EXIT
-output                  = out.$(Process)
-error                   = err.$(Process)
-log                     = log.$(Process)
+output                  = out.log
+error                   = err.log
+log                     = scirdts.log
 request_memory          = 2048M
 queue 1

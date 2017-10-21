@@ -10,6 +10,3 @@ RUN chown -R octave:octave /home/octave/
 
 USER octave
 WORKDIR /home/octave
-
-VOLUME ["/source"]
-ENTRYPOINT ["octave"]
